@@ -15,6 +15,15 @@ An advanced, privacy-first, lightweight client-side application designed to gene
 
 ---
 
+## 💡 Motivation (개발 동기)
+
+When planning university timetables, I always prioritize the courses I actually want to take rather than which professor is teaching them. However, manually mapping and combining different course divisions while ensuring zero time overlaps was extremely tedious and frustrating to do every single semester. 
+
+This tool was built to solve that exact problem: to instantly automate the combinatorics of schedule generation, allowing students to select their desired curriculum and get all valid, collision-free timetable options in milliseconds.
+
+---
+
+
 ## ⚡ Key Features
 
 * **📋 Smart Raw Text Parser:** Automatically extracts course codes, names, credits, classroom locations, instructor names, and weekly time slots directly from university portal transcripts (KNU Yoram / Everytime) using robust regex heuristics.
