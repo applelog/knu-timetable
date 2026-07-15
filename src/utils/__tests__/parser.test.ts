@@ -45,11 +45,11 @@ describe('brochure parser tests', () => {
 
   describe('parseBookletLine', () => {
     it('should parse a typical pipe-delimited brochure row', () => {
-      const line = '00 | 보육실습 | 3 | 3 | 교102 | 장정윤 | 금09:00-11:40';
+      const line = '00 | 보육실습 | 3 | 3 | 교102 | 장교수 | 금09:00-11:40';
       const parsed = parseBookletLine(line);
       expect(parsed).not.toBeNull();
       expect(parsed?.courseName).toBe('보육실습');
-      expect(parsed?.instructor).toBe('장정윤');
+      expect(parsed?.instructor).toBe('장교수');
       expect(parsed?.classroom).toBe('교102');
       expect(parsed?.credits).toBe(3);
       expect(parsed?.divisionName).toBe('00');
@@ -58,11 +58,11 @@ describe('brochure parser tests', () => {
     });
 
     it('should parse a space-delimited brochure row with shorthand periods', () => {
-      const line = '00 신입생세미나II 1 1 샬308 정혜경 목14:40-17:20';
+      const line = '00 신입생세미나II 1 1 샬308 정교수 목14:40-17:20';
       const parsed = parseBookletLine(line);
       expect(parsed).not.toBeNull();
       expect(parsed?.courseName).toBe('신입생세미나II');
-      expect(parsed?.instructor).toBe('정혜경');
+      expect(parsed?.instructor).toBe('정교수');
       expect(parsed?.classroom).toBe('샬308');
       expect(parsed?.divisionName).toBe('00');
       expect(parsed?.slots).toHaveLength(1);
@@ -85,36 +85,36 @@ describe('brochure parser tests', () => {
     });
 
     it('should extract instructor as the token right before the time slot', () => {
-      const line = '2 전공선택 BB14201 02 노인복지론 3 3 샬304 박영선 화11:50-13:05';
+      const line = '2 전공선택 BB14201 02 노인복지론 3 3 샬304 박교수 화11:50-13:05';
       const parsed = parseBookletLine(line);
       expect(parsed).not.toBeNull();
-      expect(parsed?.instructor).toBe('박영선');
+      expect(parsed?.instructor).toBe('박교수');
     });
 
     it('should parse 0 credit courses correctly (e.g. Chapel)', () => {
-      const line = '2 기초교양 ND01609 02 채플(행복나눔)IV 종합적사고 0 0 우1 대강당 이민우 목14:40-15:30';
+      const line = '2 기초교양 ND01609 02 채플(행복나눔)IV 종합적사고 0 0 우1 대강당 이교수 목14:40-15:30';
       const parsed = parseBookletLine(line);
       expect(parsed).not.toBeNull();
       expect(parsed?.courseCode).toBe('ND01609');
       expect(parsed?.courseName).toBe('채플(행복나눔)IV');
       expect(parsed?.credits).toBe(0);
-      expect(parsed?.instructor).toBe('이민우');
+      expect(parsed?.instructor).toBe('이교수');
     });
 
     it('should parse lines containing various core competencies (핵심역량)', () => {
-      const line = '2 전공선택 BB14201 02 노인복지론 창의융합 3 3 샬304 박영선 화11:50-13:05, 수13:15-14:30';
+      const line = '2 전공선택 BB14201 02 노인복지론 창의융합 3 3 샬304 박교수 화11:50-13:05, 수13:15-14:30';
       const parsed = parseBookletLine(line);
       expect(parsed).not.toBeNull();
       expect(parsed?.courseName).toBe('노인복지론');
-      expect(parsed?.instructor).toBe('박영선');
+      expect(parsed?.instructor).toBe('박교수');
     });
 
     it('should parse lines with core competency containing space or special characters', () => {
-      const line = '2 전공선택 BB14201 02 노인복지론 소통·협력 3 3 샬304 박영선 화11:50-13:05';
+      const line = '2 전공선택 BB14201 02 노인복지론 소통·협력 3 3 샬304 박교수 화11:50-13:05';
       const parsed = parseBookletLine(line);
       expect(parsed).not.toBeNull();
       expect(parsed?.courseName).toBe('노인복지론');
-      expect(parsed?.instructor).toBe('박영선');
+      expect(parsed?.instructor).toBe('박교수');
     });
   });
 
